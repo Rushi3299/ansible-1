@@ -1,0 +1,7 @@
+################
+#  Managed by Ansible
+##############
+
+{% for host in groups['web'] %}
+ {{ ansible_hostname }}
+{% endfor %}

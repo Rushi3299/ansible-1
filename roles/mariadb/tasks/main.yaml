@@ -1,0 +1,13 @@
+- name: "Installing MariaDB "
+  apt:
+    name: "{{ db_pkg }}"
+    state: present
+
+- name: "Pausing for 10 seconds"
+  pause:
+    seconds: 10
+
+- name: "Restarting MariaDB service"
+  service:
+    name: mariadb
+    state: restarted

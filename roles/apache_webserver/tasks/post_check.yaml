@@ -1,0 +1,12 @@
+- name: "Validating whether Apache2 is installed"
+  stat:
+    path: /etc/apache2
+  register: result
+
+- name: "Validating whether Apache2 is installed"
+  debug:
+    msg: "Successfully install apache"
+  when: result.stat.exists == 0
+
+
+

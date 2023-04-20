@@ -1,0 +1,9 @@
+---
+- hosts: web
+  remote_user: ubuntu
+  become: yes
+  tasks:
+  - name: "Installing MariaDB"
+    include_role: 
+      role: mariadb
+...

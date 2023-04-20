@@ -1,0 +1,20 @@
+---
+- name: "{{ nexus_task_prefix }} Create data directory"
+  file:
+    path: "{{ nexus_datadir }}"
+    owner: "{{ nexus_uid }}"
+    mode: "{{ nexus_datadir_mode }}"
+    state: directory
+
+- name: "{{ nexus_task_prefix }} Create container"
+  docker_container:
+    image: "{{ nexus_container_image }}"
+    name: "{{ nexus_container_name }}"
+    ports:
+      - "{{ nexus_bind_addr }}:{{ nexus_bind_port }}:{{ nexus_container_bind_port }}"
+    pull: "{{ nexus_container_pull }}"
+    recreate: "{{ nexus_container_recreate }}"
+    restart_policy: "{{ nexus_container_restart_policy }}"
+    state: "{{ nexus_container_state }}"
+    volumes:
+      - "{{ nexus_datadir }}:{{ nexus_container_dir }}:rw"

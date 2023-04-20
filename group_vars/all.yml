@@ -1,0 +1,6 @@
+java_version: 1.8.0
+java_home: "/usr/java/jdk1.8.0_162"
+java_bin_path: "{{ java_home }}/bin"
+
+username: "app_db"
+password: !vault | 

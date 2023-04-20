@@ -1,0 +1,17 @@
+---
+nexus_task_prefix: "=== NEXUS OSS ==="
+# Nexus settings
+nexus_bind_addr: '127.0.0.1'
+nexus_bind_port: '8081'
+nexus_datadir: "/opt/nexus"
+nexus_datadir_mode: '0755'
+nexus_uid: '200'
+# Container settings
+nexus_container_bind_port: '8081'
+nexus_container_image: "sonatype/nexus3:{{ nexus_container_tag | default('latest') }}"
+nexus_container_name: "nexus"
+nexus_container_pull: "no"
+nexus_container_recreate: "no"
+nexus_container_restart_policy: "always"
+nexus_container_state: "started"
+nexus_container_dir: "/nexus-data"

@@ -1,0 +1,4 @@
+- hosts:
+    - all # web
+  roles:
+    - "nexus"

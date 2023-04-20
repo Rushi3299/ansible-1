@@ -1,0 +1,3 @@
+- name: "Pre-validation whether it is linux ubuntu"
+  debug:
+    msg: Pre-valiation

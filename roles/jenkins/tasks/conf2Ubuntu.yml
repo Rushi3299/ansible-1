@@ -1,0 +1,44 @@
+---
+# tasks file for jenkins
+
+- apt_key:
+    repo: "https://pkg.jenkins.io/debian/jenkins.io.key"
+    state: present
+  register: aptkey
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- apt_repository:
+    repo: "deb http://pkg.jenkins.io/debian-stable binary/"
+    state: present
+    update_cache: yes
+    validate_certs: no
+  when:
+    - ansible_distribution == "Ubuntu"
+    - aptkey is success
+  register: aptrepo
+
+- name: Instalando Dependencias
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - curl
+    - apt-transport-https
+  when:
+    - ansible_os_family == "Ubuntu"
+    - aptrepo is success
+  register: DEPEND
+
+- name: Instalando Jenkins
+  apt:
+    name: jenkins
+    state: latest
+  when:
+    - ansible_os_family == "Ubuntu"
+    - DEPEND is success
+  register: PACKAGE
+  notify:
+    - Start Jenkins
+...

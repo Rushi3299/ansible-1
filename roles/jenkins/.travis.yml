@@ -1,0 +1,64 @@
+---
+language: python
+#python: "2.7"
+
+# Use the new container infrastructure
+sudo: true
+
+# This playbook need to run on Ubuntu 14.04 or later
+#dist: trust
+
+services:
+ - docker
+
+env:
+  global:
+    - ROLE_NAME: jenkins
+    - ANSIBLE_ACTION_WARNINGS: "False"
+    - ANSIBLE_COMMAND_WARNINGS: "False"
+    - ANSIBLE_DEPRECATION_WARNINGS: "False"
+    - ANSIBLE_SYSTEM_WARNINGS: "False"
+    - ANSIBLE_HOST_KEY_CHECKING: "False"
+     
+ - distribution: centos
+   version: 7
+ - distribution: fedora
+   version: 30
+ - distribution: fedora
+   version: 29  
+ - distribution: ubuntu
+   version: bionic
+ - distribution: ubuntu
+   version: xenial  
+ - distribution: debian
+   version: buster
+ - distribution: debian
+   version: stretch
+
+# Install ansible
+addons:
+ apt:
+ packages:
+ - python-pip
+
+install:
+ # Install ansible
+ - pip install ansible
+
+# Check ansible version
+ - ansible --version
+
+# Create ansible.cfg with correct roles_path
+ - printf '[defaults]\nroles_path=../' >ansible.cfg
+
+ # Install ansible role
+ - ansible-galaxy install wluisaraujo.jenkins
+
+script:
+ # Basic role syntax check
+ - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+ - ansible-playbook -i tests/inventory tests/test.yml --connection=local --check
+
+notifications:
+ webhooks: https://galaxy.ansible.com/api/v1/notifications/
+...

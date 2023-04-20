@@ -1,0 +1,17 @@
+- name: "copying private key for ssl to apache"
+  copy:
+#    src: webserver/files/solugenix.key
+    src: solugenix.key
+    dest: /etc/ssl/private
+
+- name: "copying Cert for ssl to apache"
+  copy:
+#    src: webserver/files/solugenix.com.crt
+    src: solugenix.com.crt
+    dest: /etc/ssl/certs/
+
+- name: "Restart apache"
+  service:
+    name: apache2
+    state: restarted
+

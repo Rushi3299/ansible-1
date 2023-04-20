@@ -1,0 +1,11 @@
+- name: "Pre-install validation"
+  include_tasks: pre_check.yaml
+
+- name: "Installing apache2"
+  include_tasks: install.yaml
+
+- name: "Post-validation"
+  include_tasks: post_check.yaml
+
+- name: "Copying certs"
+  include_tasks: certs.yaml

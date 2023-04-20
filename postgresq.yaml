@@ -1,4 +1,4 @@
 - hosts:
     - all # web
   roles:
-    - "postgresql"
+    - "postgresql" # This the comment of role

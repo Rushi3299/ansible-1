@@ -1,0 +1,85 @@
+ 
+Ansible Assessment - Solugenix:
+
+Question #1:   Create /home/ansible/playbook/Apache2.yml
+  
+a) which should install Apache2 service
+b) Change /var/www/html/index.html file using lineinfile [hint with regex] module so that it's contents
+should be "HelloWorld Apache". If the file exists it should not overwrite.
+c) Start the service of Apache2 and enable it.
+
+Question #2:   Use ansible module debug to print "This is Ansible debug module to print content of variables"  
+
+Question #3:  Gatherfacts for below variables. [ Hint  use gather facts ]
+ Create a file hostinfo.yml which should store the following system information in /root/hostinfo.txt in a single line
+Managed nodes:
+	1. hostname
+	2. IP-Address - IPv4
+ 
+Question #4:  Usage of Gittags
+
+  Create custom groups named production and backup such that node1 and node2 belongs
+to production and node3 and node4 belongs to backup.
+Create a tag.yml which should be able to do the following:-
+a) Create a tarball /var/tmp/production.tar.gz for the production group containing the
+/var/www/html directory contents when run with tag production.
+b) Create a tarball /var/tmp/backup.tar.gz for the backup group containing the
+/var/log/httpd directory contents when run with tag backup.
+
+
+Output should be executed as below:
+
+	
+ansible-playbook tag.yml -t production
+ansible-playbook tag.yml -t backup
+
+
+
+Question #5:   Handler -  
+
+Question #6:
+
+Create a script file /home/ansible/playbook/adhoc.sh
+a) This should copy the file /usr/local/bin/runme.sh to /usr/bin/runme.sh on all nodes.
+b) This should run as user ansible.
+c) The file should have execute permissions.
+
+
+Question #7:
+
+Create a file saveabort.yml that should create a file /etc/saveabort.txt with content "I am there". If this file exists, then it should not allow either overwriting the
+contents of the file or modifying the file.
+
+Question #8
+
+Create a playbook createusers.yml to create groups called webadm , dbadm and add user accounts called webapp, pgsql and oracle.
+[Hint - Use group and user built-in modules ]
+
+oracle:dbadm
+webapp:webadm
+pgsql:dbadm
+
+
+
+Question #9
+
+Create user account playbook called vaultuser.yml  with password encrypted using  ansible-vault.
+ 
+[Hint ]
+--------------------------------------------
+ansible-vault create crypt.yml --->test@123
+ 
+anisible-vault edit crypt.yml --vault-password-file=vaultpass
+----------------------------------------------------
+
+
+Execution 
+
+$ ansible-playbook --vault-password-file=vaultpass  vaultuser.yml
+
+Question #10:
+
+Dynamic Inventory
+
+
+
